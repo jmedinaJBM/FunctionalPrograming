@@ -1,0 +1,38 @@
+/build/
+/dist/
+/nbproject/private/
+/target/site/
+
+#Compiled source#
+*.com
+*.exe
+*.dll
+*.class
+*.o
+*.sh
+*.so
+
+#Packages#
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.war
+*.rar
+*.tar
+*.zip
+
+#Logs y Database#
+*.log
+*.sql
+*.sqlite
+
+#OS Files#
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+ehthumbs.db
+Thumbs.db
+/nbproject/
