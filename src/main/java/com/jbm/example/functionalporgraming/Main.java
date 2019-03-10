@@ -55,14 +55,6 @@ public class Main {
             return(menor);
         };
         
-        //---Definición del Predicate--- Filtrar mujeres mayores.
-        Predicate<Persona> filtroMujeresMayores = (Persona per) -> {
-            boolean mujerMayor = per.getEdad()>=18 && "F".equals(per.getGenero());
-            return(mujerMayor);
-        };
-        
-        
-        
         //---Creación de la lista de Personas---
         Personas personas = getListPersonas(10);
         
@@ -87,14 +79,15 @@ public class Main {
         personasMenores.forEach(imprimePersona);        //<--- consumer en funcionamiento.
         
         
-        //---Definición de un Supplier--- Para juntar las mujeres mayores con todos los menores.
-        Supplier<Personas> mujeresyMenores = () -> personasMenores;
+        //---Definición de un Supplier---
+        Personas personasMenores2 = new Personas();
+        Supplier<Personas> menores2 = () -> personasMenores2;
         
-        personas.subList(filtroMujeresMayores, mujeresyMenores);    //<--- supplier en funcionamiento.
-        System.out.println("\n---RESULTADO: MENORES DE EDAD y MUJERES MAYORES---");
-        personasMenores.forEach(imprimePersona);        //<--- consumer en funcionamiento.
+        personas.subList(filtroEdad, menores2);    //<--- supplier en funcionamiento.
+        System.out.println("\n---RESULTADO: MENORES DE EDAD CON SUPPLIER---");
+        personasMenores2.forEach(imprimePersona);        //<--- consumer en funcionamiento.
         
-        //---Definición de un BiConsumer--- para evaluar si las personas cumplen o no una condición.
+        //---Definición de un BiConsumer--- para identificar si las personas cumplen o no una condición.
         BiConsumer<Persona,Boolean> separador = (Persona persona, Boolean resultado) -> {
             System.out.print((resultado? "ACEPTADO" : "RECHAZADO")+ " \t");
             imprimePersona.accept(persona);

@@ -31,6 +31,13 @@ public class Personas extends ArrayList<Persona> implements Comparator<Persona> 
     
     
     //******************************************************************************************************************
+    /**
+     * Compara los dos objetos Persona y devuelve 0: si persona1 es igual a pesona2, -1 si persona1 es menor que persona2,
+     * 1 si persona1 es mayor que persona2.
+     * @param persona1 Persona a comparar.
+     * @param persona2 Pesona a comparar.
+     * @return 0: si persona1 es igual a pesona2, -1 si persona1 es menor que persona2, 1 si persona1 es mayor que persona2.
+     */
     @Override
     public int compare(Persona persona1, Persona persona2) {
         if(this.comparador!=null){
@@ -59,16 +66,16 @@ public class Personas extends ArrayList<Persona> implements Comparator<Persona> 
      * Evalua las personas contenidas en esta lista con la condición dada por el {@link Predicate} {@code filtro}
      * y los agrega a la lista {@code lista}.
      * @param filtro Condición de evaluación.
-     * @param lista Un supplier que entrega la lista donde se agregarán las Personas que cumplen la condición.
+     * @param proveedorList Un supplier que entrega la lista donde se agregarán las Personas que cumplen la condición.
      * @return Lista de personas filtradas.
      */
-    public Personas subList(Predicate<Persona> filtro, Supplier<Personas> lista){
+    public Personas subList(Predicate<Persona> filtro, Supplier<Personas> proveedorList){
         for(Persona persona : this){
             if(filtro.test(persona)){
-                lista.get().add(persona);
+                proveedorList.get().add(persona);
             }
         }
-        return(lista.get());
+        return(proveedorList.get());
     }
     
     /**
