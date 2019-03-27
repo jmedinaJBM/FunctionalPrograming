@@ -147,6 +147,7 @@ public int compare(Persona persona1, Persona persona2) {
         return(persona1.compareTo(persona2));
     }
 }
+```
 ```java
 //---Implementación del método compareTo en la clase Persona---
 @Override
@@ -164,4 +165,15 @@ public int compareTo(Persona persona) throws IllegalStateException, NullPointerE
     int result = this.getEdad().intValue()==persona.getEdad().intValue() ? 0 : edad < persona.getEdad() ? -1 : 1;
     return(result);
 }
+```
+```java
+//---Definición del BiFunction--- Comparador de Nombre.
+BiFunction<Persona,Persona,Integer> comparadorNombre = (Persona per1, Persona per2) -> {
+    int result = per2.getNombre().compareTo(per1.getNombre());
+    return(result);
+};
+
+//---Estableciendo comparadorNombre utilizando setComparador de la clase Personas---
+personas.setComparador(comparadorNombre);   //<--- estableciendo el comparador de Nombre.
+personas.sort(personas);                //<--- comparador en funcionamiento.
 ```
