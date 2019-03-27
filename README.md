@@ -177,4 +177,26 @@ BiFunction<Persona,Persona,Integer> comparadorNombre = (Persona per1, Persona pe
 personas.setComparador(comparadorNombre);   //<--- estableciendo el comparador de Nombre.
 personas.sort(personas);                //<--- comparador en funcionamiento.
 ```
-7.  **BinaryOperator\<Persona>** <br/> Recordemos que el [BinaryOperator\<T>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BinaryOperator.html) es un [BiFunction<T,T,T>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BiFunction.html) que recibe dos objetos del mismo tipo y devuelve uno de ellos; es por eso que su función básica es elegir a uno de los dos objetos presentados. Como ejemplo tenemos un *Clasificador* que recibe en parámetro dos objetos de tipo Persona, per1 y per2,  evalúa una condición para decidir cual elegir y devolverlo. Además, en la clase Personas, hemos creado el método llamado getMejor que recibe en parámetro un clasificador, que es un BinaryOperator<Persona>, y devuelve un objeto Persona como resultado de la clasificación
+7.  **BinaryOperator\<Persona>** <br/> Recordemos que el [BinaryOperator\<T>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BinaryOperator.html) es un [BiFunction<T,T,T>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BiFunction.html) que recibe dos objetos del mismo tipo y devuelve uno de ellos; es por eso que su función básica es elegir a uno de los dos objetos presentados. Como ejemplo tenemos un *Clasificador* que recibe en parámetro dos objetos de tipo *Persona*, **per1** y **per2**,  evalúa una condición para decidir cual elegir y devolverlo. Además, en la clase *Personas*, hemos creado el método llamado **getMejor** que recibe en parámetro un *clasificador*, que es un *BinaryOperator\<Persona>*, y devuelve un objeto *Persona* como resultado de la clasificación. <br/><br/> 
+Podemos ver la definición del **clasificadorMayor** que evalúa la edad de los dos objetos de tipo *Persona*, **per1** y **per2**, y devuelve el de mayor edad. Luego se hace el llamado al método *personas*.**getMejor**(*clasificadorMayor*) que devolverá la persona Mayor de todas en la lista.
+```java
+//---Método getMejor de la clase Persona---
+public Persona getMejor(BinaryOperator<Persona> clasificador){
+    Persona personaMayor = this.isEmpty()? null : this.get(0);
+    for(int i=0; i< this.size(); i++){
+        personaMayor = clasificador.apply(personaMayor, this.get(i));
+    }
+    return(personaMayor);
+}
+```
+```java
+//---Definición de un BinaryOperator--- Para buscar la persona de Mayor edad.
+BinaryOperator<Persona> clasificadorMayor = (Persona per1, Persona per2) -> {
+    return(per2.getEdad() > per1.getEdad()? per2 : per1);
+};
+
+//---Llamado al método getMejor con el BinaryOperator clasificadorMayor---
+Persona personaMayor = personas.getMejor(clasificadorMayor);    //<--- operador binario en funcionamiento.
+personas.setComparador(null);                                   //<--- para usar el comparador predefinido en la clase Persona.
+Persona personaMayor2= personas.getMayor();
+```
