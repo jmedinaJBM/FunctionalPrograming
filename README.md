@@ -29,7 +29,7 @@ Se utiliza para realizar alguna operación con el valor de *T*, pero sin devolve
 
 ## Ejemplos con Java
 Los ejemplos que incluyo en esta nota, son ejemplos básico, con fines ilustrativos; para ello he creado dos clases, **Persona** y **Personas**. *Persona* es una clase para crear objetos que representen los datos de una Persona, valga la redundancia, esto es: id, nombre, apellido, fecha de nacimiento y genero. *Personas* es una lista definida como *ArrayList\<Persona>* para contener elementos de tipo *Persona*.  Crearemos una lista de personas en una variable que llamaremos **_personas_**, (en minúscula) y con esta lista vamos ejemplificar el uso de las *Interfaces Funcionales*. <br/><br/>
-Ejemplo 1. **Function<Date,Integer>**<br/> En la clase *Persona*, la edad es un valor calculado en función de la fecha de nacimiento. Para ello *Persona* tiene el método **setCalculadorEdad** que se utiliza para definir un *Function<Date,Integer>* que se ocupa de calcular la edad. <br/>
+1. **Function<Date,Integer>**<br/> En la clase *Persona*, la edad es un valor calculado en función de la fecha de nacimiento. Para ello *Persona* tiene el método **setCalculadorEdad** que se utiliza para definir un *Function<Date,Integer>* que se ocupa de calcular la edad. <br/>
 ```java
 Function<Date,Integer> calculadorEdad = (Date fechaNacimiento) -> {
     Calendar cal = Calendar.getInstance();
@@ -53,7 +53,7 @@ public Integer  getEdad() throws IllegalStateException {
     return(this.calculadorEdad.apply(this.fechaNacimiento));
 }
 ```
-Ejemplo 2. **Consumer\<Persona>**<br/>En este ejemplo veremos como se utiliza el consumer, de hecho en el ejemplo anterior, hay dos ejemplos de *Consumer*; uno de ellos lo detallamos aquí.<br/>
+2. **Consumer\<Persona>**<br/>En este ejemplo veremos como se utiliza el consumer, de hecho en el ejemplo anterior, hay dos ejemplos de *Consumer*; uno de ellos lo detallamos aquí.<br/>
 El consumer **imprimePersona** solamente recibe el parámetro **p** de tipo *Persona* y lo utiliza para imprimir por consola los datos correspondientes del objeto *p*, pero no retorna valor alguno.
 ```java
 //---Definición del Consumer--- imprime por consola los datos de la persona.
@@ -63,4 +63,4 @@ Consumer<Persona> imprimePersona = (Persona p) -> {
 
 personas.forEach(imprimePersona);       //<--- consumer en funcionamiento.
 ```
-Ejemplo 3. <br/>
+3. **Predicate\<Persona>** <br/>
