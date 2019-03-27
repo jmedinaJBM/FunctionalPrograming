@@ -13,7 +13,7 @@ Es una interface como cualquiera, pero con la anotación **_@FunctionalInterface
 * 1)  **Function<T,R>:**
 Similar a una función matemática de dos variables **R = f(T)**, donde _T_ representa el valor de la variable _x_ , _R_ es el tipo de dato del valor resultante que debe devolver la función. En Java se expresa así:  
 ```
-**_(T  param) -> R_**
+(T  param) -> R
 ```
 Puede apreciarse el operador Lamda formado por el guión junto con el símbolo mayor que: __->__.  Los paréntesis son parte de la expresión. Sin el operador Lamda, en Java se ve así: **_R  apply(T param)_**.  
 Se utiliza para hacer un cálculo con el valor de _T_ y obtener como resultado un valor de tipo _R_ que debe ser retornado; en el ejemplo calcularemos la edad de una persona dada su fecha de nacimiento.
