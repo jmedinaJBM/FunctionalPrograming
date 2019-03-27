@@ -134,4 +134,34 @@ BiConsumer<Persona,Boolean> separador = (Persona persona, Boolean resultado) -> 
 System.out.println("\n---RESULTADO: PERSONAS ACEPTADAS Y RECHAZADAS---");
 personas.subList(filtroEdad, separador);        //<--- biconsumer en funcionamiento.
 ```
-6.  **BiFunction<Persona,Persona,Integer>** <br/>Para este ejemplo vamos a construir un **comparador** utilizando las interface *[Comparator](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html)* y *[Comparable](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)*. Básicamente un comparador sirve para ordenar una lista de elementos determinando si un elemento es menor, igual o mayor que otro. Para ello la clase Persona debe implementar la interface Comparable y la clase Personas debe implementar la interface Comparator y también definir un método para establecer el comparador, un BiFunction que recibe 2 objetos Persona y que devuelve un valor entero.
+6.  **BiFunction<Persona,Persona,Integer>** <br/>Para este ejemplo vamos a construir un **comparador** utilizando las interface *[Comparator\<T>](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html)* y *[Comparable\<T>](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)*. Básicamente un comparador sirve para ordenar una lista de elementos determinando si un elemento es menor, igual o mayor que otro. Para ello la clase *Persona* debe implementar la interface **Comparable** y la clase *Personas* debe implementar la interface *Comparator* y también definir un método para establecer el comparador, un *BiFunction* que recibe 2 objetos *Persona* y que devuelve un valor entero.<br/><br/>
+El *BiFunction* que hemos nombrado **comparadorNombre**, este recibe dos objetos de tipo *Persona* **per1** y **per2** y devuelve un valor entero como resultado de la comparación entre los nombres de ambos objetos.<br/><br/>
+En la clase *Personas* se implementa el método **compare**, que recibe los dos objetos *Persona* a comparar, **persona1** y **persona2**, los que son pasados en parámetros al apply del comparador. Si el comparador (el BiFunction) no se ha establecido, entonces se utiliza la comparación definida por defecto en los objetos *Persona*, la comparación se realiza con la edad.  Finalmente establecemos **comparadorNombre** con **setComparador(comparadorNombre)** en la lista personas (objeto de la clase Personas) y llamamos al método **personas.sort(personas)**; al recorrer la lista personas e imprimir por consola cada objeto veremos la lista ordenada por nombre.
+```java
+//---Implementación del método compare en la clase Personas---
+@Override
+public int compare(Persona persona1, Persona persona2) {
+    if(this.comparador!=null){
+        return(this.comparador.apply(persona1, persona2)); 
+    }else{
+        return(persona1.compareTo(persona2));
+    }
+}
+```java
+//---Implementación del método compareTo en la clase Persona---
+@Override
+public int compareTo(Persona persona) throws IllegalStateException, NullPointerException {
+    if(this.fechaNacimiento==null){
+        throw new IllegalStateException("La fecha de nacimiento es null");
+    }
+    if(persona==null){
+        throw new NullPointerException ("El objeto a comprar es null");
+    }
+    if(persona.getFechaNacimiento()==null){
+        throw new NullPointerException ("La fecha de nacimiento del objeto a comprar es null");
+    }
+    int edad = this.getEdad();
+    int result = this.getEdad().intValue()==persona.getEdad().intValue() ? 0 : edad < persona.getEdad() ? -1 : 1;
+    return(result);
+}
+```
