@@ -18,6 +18,7 @@ Se utiliza para hacer un cálculo con el valor de _T_ y obtener como resultado u
 * 2)  **Consumer<T>:**
 Similar a **Function<T,R>**, con la diferencia, como puede apreciarse, no tiene la _R_, esto significa que no devuelve un valor. En Java se expresa así: ```(T) -> ```  Sin el operador Lamda, se vería así:  **_void accept(T param)_**.  
 Se utiliza para realizar alguna operación con el valor de _T_, pero sin devolver nada, puede ser una operación de guardado o de impresión.
-
 * 3)  **Predicate<T>:**
 Similar a Function<T,R>, con la diferencia de que el valor a devolver siempre es un valor lógico (Boolean:  true,  false). En Java se expresa así: ```(T) -> boolean``` Sin el operador Lamda, se vería así:  **_boolean test(T param)_**.  Se utiliza para realizar operaciones lógicas, generalmente en operaciones de búsqueda o de filtrado.
+* 4)  **Supplier<T>:**
+Su traducción al español es Proveedor. Significa que provee un objeto de tipo _T_, pero no recibe ningún parámetro. En Java se expresa así: ```() -> T ``` Sin el operador Lamda, se vería así:  **_T get()_** . Se utiliza generalmente para proveer objetos contenedores como los _List_.
