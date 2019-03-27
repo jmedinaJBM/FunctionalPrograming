@@ -112,16 +112,9 @@ personasMenores2.forEach(imprimePersona);        //<--- consumer en funcionamien
         
 ```
 5.  **BiConsumer<Persona, Boolean>** <br/> Para ilustrar este ejemplo, hemos construido un *Consumer* que llamaremos **separador**, (un concepto creado para este ejemplo), que utilizaremos en un nuevo método **subList** creado en la clase *Personas*; este en lugar de devolvernos en una lista las personas menores de 18, nos entregará cada persona indicándonos si ha sido aceptada o rechazada, de acuerdo al criterio del *Predicate filtroEdad* definido anteriormente. Esto nos da la oportunidad de decidir que hacer con cada objeto aceptado y/o rechazado. <br/><br/>
-En la definición del *BiConsumer separador*, vemos que este recibe 2 parámetros: el parámetro *persona* de tipo *Persona* y resultado de tipo *Boolean*, donde se indica *true* si es aceptado (es menor de 18) o *false* y si es rechazado (no es menor de 18). De esta forma se tiene la oportunidad de procesar todos los elementos y decidir que hacer con estos, identificando los aceptados y rechazados; en este ejemplo solo se imprime por consola si es Aceptado o Rechazado cada objeto *Persona*. El llamado al método **subList** se realiza con *filtroEdad* y *separador*.
+En la definición del *BiConsumer* **separador**, vemos que este recibe 2 parámetros: el parámetro *persona* de tipo *Persona* y resultado de tipo *Boolean*, donde se indica *true* si es aceptado (es menor de 18) o *false* y si es rechazado (no es menor de 18). De esta forma se tiene la oportunidad de procesar todos los elementos y decidir que hacer con estos, identificando los aceptados y rechazados; en este ejemplo solo se imprime por consola si es Aceptado o Rechazado cada objeto *Persona*. El llamado al método **subList** se realiza con *filtroEdad* y *separador*.
 ```java
 //---Método subList en la clase Personas---
-/**
- * Evalua las personas contenidas en esta lista con la condición dada en {@code filtro}
- * y entrega en el {@code separador} los objetos indicando si fue aceptado o rechazado. Esto permite
- * que se puedan construir dos listas o procesarlos pero desde afuera.
- * @param filtro Condición de evaluación.
- * @param separador Un {@link BiConsumer} el cual recibe los objetos aceptados y rechazados.
- */
 public void subList(Predicate<Persona> filtro, BiConsumer<Persona,Boolean> separador){
     for(Persona persona : this){
         if(filtro.test(persona)){
@@ -131,4 +124,13 @@ public void subList(Predicate<Persona> filtro, BiConsumer<Persona,Boolean> separ
         }
     }
 }
+```
+```java
+//---Definición de un BiConsumer--- para identificar si las personas cumplen o no una condición.
+BiConsumer<Persona,Boolean> separador = (Persona persona, Boolean resultado) -> {
+    System.out.print((resultado? "ACEPTADO" : "RECHAZADO")+ " \t");
+    imprimePersona.accept(persona);
+};
+System.out.println("\n---RESULTADO: PERSONAS ACEPTADAS Y RECHAZADAS---");
+personas.subList(filtroEdad, separador);        //<--- biconsumer en funcionamiento.
 ```
