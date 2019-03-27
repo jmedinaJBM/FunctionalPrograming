@@ -7,7 +7,7 @@ Es un paradigma de programación basado en el concepto de funciones matemáticas
 Una función en matemáticas se representa así:   **``Y = f (x)``** ;  donde **x** es una variable que determina el valor de **Y**. En la programación funcional, al igual que en matemáticas, se pueden definir expresiones con más de una variable para obtener un resultado en **Y**.
 En Java, a partir de la versión 8 (*Java Standard Edition 8*), hay disponible diferentes elementos que explotan al máximo la programación funcional, entre ellos están las *Interfaces Funcionales* y el Operador Lamda `->`. 
 
-## Interfaces Funcionales Java:
+## Interfaces Funcionales Java
 Es una interface como cualquiera, pero con la anotación **_@FunctionalInterface_** y que define un único método abstracto a ser implementado. Están definidas en el paquete _java.util.function_. Utilizadas exclusivamente en la programación funcional en Java. A continuación una explicación breve de cada una.
 
 1.  **Function<T,R>:** Similar a una función matemática de dos variables **`R = f(T)`**, donde **T** representa el valor de la variable *x* , **R** es el tipo de dato del valor resultante que debe devolver la función. En Java se expresa así: **`(T param) -> R `** Puede apreciarse el operador Lamda formado por el guión junto con el símbolo mayor que: `->`.  Los paréntesis son parte de la expresión. Sin el operador Lamda, en Java se ve así: **`R  apply(T param)`**. <br/>
@@ -26,3 +26,8 @@ Se utiliza para realizar alguna operación con el valor de *T*, pero sin devolve
 1. [NetBeans 8.2](https://netbeans.org/downloads/)
 2. [Java SE JDK 1.8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html?fbclid=IwAR21GQMtgfZY7ZzLscX538bwGPkzqT8ap2jXCFUy0Ycnmxqy4hEDja7XPJo) update más reciente.
 3. [Apache Maven 3.6](https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.zip?fbclid=IwAR2pO8S7v5Frm0eKYDoTemFWSu7w0fIYOIXsDrmrthNlUKGHQbF6uN5TkoM)
+
+## Ejemplos con Java
+Ejemplo 1. **Function<Date,Integer>**<br/>
+Ejemplo 2. <br/>
+Ejemplo 3. <br/>
