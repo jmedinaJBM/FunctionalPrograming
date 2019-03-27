@@ -87,7 +87,8 @@ Personas personasMenores = personas.subList(filtroEdad); //<--- predicado en fun
 System.out.println("\n---RESULTADO: MENORES DE EDAD---");
 personasMenores.forEach(imprimePersona);        //<--- consumer en funcionamiento.
 ```
-4.  **Supplier\<Persona>** <br/> Para ilustrar este ejemplo, crearemos un segundo método **subList** en la clase *Personas* con la variante que le agregamos un segundo parámetro, este es un *Supplier\<Persona>* que llamaremos **proveedorLista**, el cual proporciona una lista vacía donde se agregarán los objetos *Persona* que cumplan la condición dada en el parámetro **filtro**. Utilizaremos el mismo *Predicate* **filtroEdad** que hemos definido antes para obtener las personas menores de 18 años, pero en lugar de soloamente retornarlas, las agregaremos a la lista que proporciona **proveedorLista**.
+4.  **Supplier\<Persona>** <br/> Para ilustrar este ejemplo, crearemos un segundo método **subList** en la clase *Personas* con la variante que le agregamos un segundo parámetro, este es un *Supplier\<Persona>* que llamaremos **proveedorLista**, el cual proporciona una lista vacía donde se agregarán los objetos *Persona* que cumplan la condición dada en el parámetro **filtro**. Utilizaremos el mismo *Predicate* **filtroEdad** que hemos definido antes para obtener las personas menores de 18 años, pero en lugar de soloamente retornarlas, las agregaremos a la lista que proporciona **proveedorLista**. <br/><br/>
+En la definición del Supplier que hemos nombrado **menores2**, primero hemos creado la lista *personasMenores2* y seguido el Supplier *menores2* que retorna la lista creada. Finalmente tenemos el llamado al método *subList* con el Supplier *menores2*  y con el mismo Predicate *filtroEdad* definido para el ejemplo anterior. El resultado que se obtiene es el mismo, una lista con las personas menores de 18 años.
 ```java
 //---Método sublist de la clase Personas con Predicate<Persona> y Supplier<Persona>---
 public Personas subList(Predicate<Persona> filtro, Supplier<Personas> proveedorList){
@@ -98,4 +99,15 @@ public Personas subList(Predicate<Persona> filtro, Supplier<Personas> proveedorL
     }
     return(proveedorList.get());
 }
+```
+```java
+//---Definición de un Supplier---
+Personas personasMenores2 = new Personas();
+Supplier<Personas> menores2 = () -> personasMenores2;
+
+//---Utilizando subList con el supplier menores2---
+personas.subList(filtroEdad, menores2);    //<--- supplier en funcionamiento.
+System.out.println("\n---RESULTADO: MENORES DE EDAD CON SUPPLIER---");
+personasMenores2.forEach(imprimePersona);        //<--- consumer en funcionamiento.
+        
 ```
