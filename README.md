@@ -15,7 +15,7 @@ Similar a una función matemática de dos variables **R = f(T)**, donde _T_ repr
 ```(T  param) -> R ```
 Puede apreciarse el operador Lamda formado por el guión junto con el símbolo mayor que: **->**.  Los paréntesis son parte de la expresión. Sin el operador Lamda, en Java se ve así: **_R  apply(T param)_**.  
 Se utiliza para hacer un cálculo con el valor de _T_ y obtener como resultado un valor de tipo _R_ que debe ser retornado; en el ejemplo calcularemos la edad de una persona dada su fecha de nacimiento.
-2.  **Consumer<T>:**
+2.  **Consumer<amp;T>amp;:**
 Similar a **Function<T,R>**, con la diferencia, como puede apreciarse, no tiene la _R_, esto significa que no devuelve un valor. En Java se expresa así: ```(T) -> ```  Sin el operador Lamda, se vería así:  **_void accept(T param)_**.  
 Se utiliza para realizar alguna operación con el valor de _T_, pero sin devolver nada, puede ser una operación de guardado o de impresión.
 3.  **Predicate<T>:**
