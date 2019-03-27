@@ -29,6 +29,7 @@ Se utiliza para realizar alguna operación con el valor de *T*, pero sin devolve
 
 ## Ejemplos con Java
 Los ejemplos que incluyo en esta nota, son ejemplos básico, con fines ilustrativos; para ello he creado dos clases, **Persona** y **Personas**. *Persona* es una clase para crear objetos que representen los datos de una Persona, valga la redundancia, esto es: id, nombre, apellido, fecha de nacimiento y genero. *Personas* es una lista definida como *ArrayList\<Persona>* para contener elementos de tipo *Persona*.  Crearemos una lista de personas en una variable que llamaremos **_personas_**, (en minúscula) y con esta lista vamos ejemplificar el uso de las *Interfaces Funcionales*. <br/><br/>
+
 1. **Function<Date,Integer>**<br/> En la clase *Persona*, la edad es un valor calculado en función de la fecha de nacimiento. Para ello *Persona* tiene el método **setCalculadorEdad** que se utiliza para definir un *Function<Date,Integer>* que se ocupa de calcular la edad. <br/>
 ```java
 Function<Date,Integer> calculadorEdad = (Date fechaNacimiento) -> {
@@ -39,8 +40,7 @@ Function<Date,Integer> calculadorEdad = (Date fechaNacimiento) -> {
     int edad = calHoy.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
     return(edad);
 };
-```
-Puede verse, la función que recibe en parámetro la fecha de nacimiento y devuelve la edad calculada. **Date** es el tipo de dato del parámetro *fechaNacimiento*, **Integer** es el tipo de dato de la edad calculada a devolver. <br/> A continuación se establece la función *calculadorEdad* a cada elemento de la lista personas; de manera que al llamar al método **getEdad()**, hará un llamado a esta función con la fecha de nacimiento y devolverá la edad calculada.
+``` Puede verse, la función que recibe en parámetro la fecha de nacimiento y devuelve la edad calculada. **Date** es el tipo de dato del parámetro *fechaNacimiento*, **Integer** es el tipo de dato de la edad calculada a devolver. <br/> A continuación se establece la función *calculadorEdad* a cada elemento de la lista personas; de manera que al llamar al método **getEdad()**, hará un llamado a esta función con la fecha de nacimiento y devolverá la edad calculada.
 ```java
 personas.forEach((Persona p) -> p.setCalculadorEdad(calculadorEdad));
 ```
@@ -63,4 +63,4 @@ Consumer<Persona> imprimePersona = (Persona p) -> {
 
 personas.forEach(imprimePersona);       //<--- consumer en funcionamiento.
 ```
-3. **Predicate\<Persona>** <br/>
+3. **Predicate\<Persona>** <br/> Para este caso, vamos a crear un Predicate<Persona> que llamaremos filtroEdad, que nos permita obtener de la lista de personas, las Personas que sean menores de 18 años; y en la clase Personas, (la lista, ver Figura-9), creamos un método subList que recibirá en parámetros el Predicate<Persona> filtroEdad, que utiliza para filtrar las personas contenidas en la lista según las condiciones definidas en el Predicate<Persona> dado en el parámetro filtro.
