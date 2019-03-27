@@ -20,5 +20,4 @@ Similar a **Function<T,R>**, con la diferencia, como puede apreciarse, no tiene 
 Se utiliza para realizar alguna operación con el valor de _T_, pero sin devolver nada, puede ser una operación de guardado o de impresión.
 
 * 3)  **Predicate<T>:**
-Similar a Function<T,R>, con la diferencia de que el valor a devolver siempre es un valor lógico (Boolean:  true,  false). En Java se expresa así: ```(T) -> boolean``` Sin el operador Lamda, se vería así:  **_boolean test(T param)_**. 
-Se utiliza para realizar operaciones lógicas, generalmente en operaciones de búsqueda o de filtrado.
+Similar a Function<T,R>, con la diferencia de que el valor a devolver siempre es un valor lógico (Boolean:  true,  false). En Java se expresa así: ```(T) -> boolean``` Sin el operador Lamda, se vería así:  **_boolean test(T param)_**.  Se utiliza para realizar operaciones lógicas, generalmente en operaciones de búsqueda o de filtrado.
