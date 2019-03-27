@@ -40,12 +40,13 @@ Function<Date,Integer> calculadorEdad = (Date fechaNacimiento) -> {
     int edad = calHoy.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
     return(edad);
 };
-``` Puede verse, la función que recibe en parámetro la fecha de nacimiento y devuelve la edad calculada. **Date** es el tipo de dato del parámetro *fechaNacimiento*, **Integer** es el tipo de dato de la edad calculada a devolver. <br/> A continuación se establece la función *calculadorEdad* a cada elemento de la lista personas; de manera que al llamar al método **getEdad()**, hará un llamado a esta función con la fecha de nacimiento y devolverá la edad calculada.
+``` 
+Puede verse, la función que recibe en parámetro la fecha de nacimiento y devuelve la edad calculada. **Date** es el tipo de dato del parámetro *fechaNacimiento*, **Integer** es el tipo de dato de la edad calculada a devolver. <br/> A continuación se establece la función *calculadorEdad* a cada elemento de la lista personas; de manera que al llamar al método **getEdad()**, hará un llamado a esta función con la fecha de nacimiento y devolverá la edad calculada.
 ```java
 personas.forEach((Persona p) -> p.setCalculadorEdad(calculadorEdad));
 ```
-Método **getEdad()** en la clase *Persona*.
 ```java
+//---Método getEdad() en la clase Persona---
 public Integer  getEdad() throws IllegalStateException {
     if(this.calculadorEdad==null){
         throw new IllegalStateException("Calculador de edad no definido");
@@ -63,4 +64,27 @@ Consumer<Persona> imprimePersona = (Persona p) -> {
 
 personas.forEach(imprimePersona);       //<--- consumer en funcionamiento.
 ```
-3. **Predicate\<Persona>** <br/> Para este caso, vamos a crear un Predicate<Persona> que llamaremos filtroEdad, que nos permita obtener de la lista de personas, las Personas que sean menores de 18 años; y en la clase Personas, (la lista, ver Figura-9), creamos un método subList que recibirá en parámetros el Predicate<Persona> filtroEdad, que utiliza para filtrar las personas contenidas en la lista según las condiciones definidas en el Predicate<Persona> dado en el parámetro filtro.
+3. **Predicate\<Persona>** <br/> Para este caso, vamos a crear un *Predicate\<Persona>* que llamaremos **filtroEdad**, que nos permita obtener de la lista de personas, las Personas que sean menores de *18 años*; y en la clase *Personas*, creamos un método **subList** que recibirá en parámetros el *Predicate\<Persona> filtroEdad*, que utiliza para filtrar las personas contenidas en la lista según las condiciones definidas en el *Predicate\<Persona>* dado en el parámetro filtro. <br/> puede verse que el predicate *filtroEdad*, recibe el parámetro **per** de tipo *Persona* y determina si el objeto es menor de 18 años, de ser así devuelve *true*.
+```java
+//---Método subList en la clase Personas---
+public Personas subList(Predicate<Persona> filtro){
+    Personas subLista = new Personas();
+    for(Persona persona : this){
+        if(filtro.test(persona)){
+            subLista.add(persona);
+        }
+    }
+    return (subLista);
+}
+```
+```java
+//---Definición del Predicate--- Filtrar menores de 18 años.
+Predicate<Persona> filtroEdad = (Persona per) -> {
+    boolean menor = per.getEdad() < 18;
+    return(menor);
+};
+
+Personas personasMenores = personas.subList(filtroEdad); //<--- predicado en funcionamiento.
+System.out.println("\n---RESULTADO: MENORES DE EDAD---");
+personasMenores.forEach(imprimePersona);        //<--- consumer en funcionamiento.
+```
