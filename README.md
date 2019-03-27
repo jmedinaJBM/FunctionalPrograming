@@ -51,7 +51,16 @@ public Integer  getEdad() throws IllegalStateException {
         throw new IllegalStateException("Calculador de edad no definido");
     }
     return(this.calculadorEdad.apply(this.fechaNacimiento));
-    }
+}
 ```
-Ejemplo 2. <br/>
+Ejemplo 2. **Consumer\<Persona>**<br/>En este ejemplo veremos como se utiliza el consumer, de hecho en el ejemplo anterior, hay dos ejemplos de *Consumer*; uno de ellos lo detallamos aquí.<br/>
+El consumer **imprimePersona** solamente recibe el parámetro **p** de tipo *Persona* y lo utiliza para imprimir por consola los datos correspondientes del objeto *p*, pero no retorna valor alguno.
+```java
+//---Definición del Consumer--- imprime por consola los datos de la persona.
+Consumer<Persona> imprimePersona = (Persona p) -> {
+    System.out.println(p.getId() +" -> "+p.getNombre()+" "+p.getApellido() + " "+p.getEdad()+ " "+p.getGenero());
+};
+
+personas.forEach(imprimePersona);       //<--- consumer en funcionamiento.
+```
 Ejemplo 3. <br/>
