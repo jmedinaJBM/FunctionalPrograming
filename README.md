@@ -28,7 +28,7 @@ Se utiliza para realizar alguna operación con el valor de *T*, pero sin devolve
 3. [Apache Maven 3.6](https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.zip?fbclid=IwAR2pO8S7v5Frm0eKYDoTemFWSu7w0fIYOIXsDrmrthNlUKGHQbF6uN5TkoM)
 
 ## Ejemplos con Java
-Los ejemplos que incluyo en esta nota, son ejemplos básico, con fines ilustrativos; para ello he creado dos clases, **Persona** y **Personas**. *Persona* es una clase para crear objetos que representen los datos de una Persona, valga la redundancia, esto es: id, nombre, apellido, fecha de nacimiento y genero. *Personas* es una lista definida como *ArrayList\<Persona>* para contener elementos de tipo *Persona*.  Crearemos una lista de personas en una variable que llamaremos **_personas_**, (en minúscula) y con esta lista vamos ejemplificar el uso de las *Interfaces Funcionales*. <br/><br/>
+Los ejemplos que incluyo en esta nota, son ejemplos básico, con fines ilustrativos; para ello he creado dos clases, **Persona** y **Personas**. *Persona* es una clase para crear objetos que representen los datos de una Persona, valga la redundancia, esto es: id, nombre, apellido, fecha de nacimiento y genero. *Personas* es una lista definida como *ArrayList\<Persona>* para contener elementos de tipo *Persona*.  Crearemos una lista de personas en una variable que llamaremos **_personas_**, (en minúscula) y con esta lista vamos ejemplificar el uso de las *Interfaces Funcionales*. <br/><br/> Puede verse, la función que recibe en parámetro la fecha de nacimiento y devuelve la edad calculada. **Date** es el tipo de dato del parámetro *fechaNacimiento*, **Integer** es el tipo de dato de la edad calculada a devolver. <br/> A continuación se establece la función *calculadorEdad* a cada elemento de la lista personas; de manera que al llamar al método **getEdad()**, hará un llamado a esta función con la fecha de nacimiento y devolverá la edad calculada.
 
 1. **Function<Date,Integer>**<br/> En la clase *Persona*, la edad es un valor calculado en función de la fecha de nacimiento. Para ello *Persona* tiene el método **setCalculadorEdad** que se utiliza para definir un *Function<Date,Integer>* que se ocupa de calcular la edad. <br/>
 ```java
@@ -41,7 +41,6 @@ Function<Date,Integer> calculadorEdad = (Date fechaNacimiento) -> {
     return(edad);
 };
 ``` 
-Puede verse, la función que recibe en parámetro la fecha de nacimiento y devuelve la edad calculada. **Date** es el tipo de dato del parámetro *fechaNacimiento*, **Integer** es el tipo de dato de la edad calculada a devolver. <br/> A continuación se establece la función *calculadorEdad* a cada elemento de la lista personas; de manera que al llamar al método **getEdad()**, hará un llamado a esta función con la fecha de nacimiento y devolverá la edad calculada.
 ```java
 personas.forEach((Persona p) -> p.setCalculadorEdad(calculadorEdad));
 ```
@@ -87,4 +86,16 @@ Predicate<Persona> filtroEdad = (Persona per) -> {
 Personas personasMenores = personas.subList(filtroEdad); //<--- predicado en funcionamiento.
 System.out.println("\n---RESULTADO: MENORES DE EDAD---");
 personasMenores.forEach(imprimePersona);        //<--- consumer en funcionamiento.
+```
+4.  **Supplier\<Persona>** <br/> Para ilustrar este ejemplo, crearemos un segundo método **subList** en la clase *Personas* con la variante que le agregamos un segundo parámetro, este es un *Supplier\<Persona>* que llamaremos **proveedorLista**, el cual proporciona una lista vacía donde se agregarán los objetos *Persona* que cumplan la condición dada en el parámetro **filtro**. Utilizaremos el mismo *Predicate* **filtroEdad** que hemos definido antes para obtener las personas menores de 18 años, pero en lugar de soloamente retornarlas, las agregaremos a la lista que proporciona **proveedorLista**.
+```java
+//---Método sublist de la clase Personas con Predicate<Persona> y Supplier<Persona>---
+public Personas subList(Predicate<Persona> filtro, Supplier<Personas> proveedorList){
+    for(Persona persona : this){
+        if(filtro.test(persona)){
+            proveedorList.get().add(persona);
+        }
+    }
+    return(proveedorList.get());
+}
 ```
