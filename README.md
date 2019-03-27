@@ -40,5 +40,9 @@ Function<Date,Integer> calculadorEdad = (Date fechaNacimiento) -> {
     return(edad);
 };
 ```
+Puede verse, la función que recibe en parámetro la fecha de nacimiento y devuelve la edad calculada. **Date** es el tipo de dato del parámetro *fechaNacimiento*, **Integer** es el tipo de dato de la edad calculada a devolver. <br/> A continuación se establece la función *calculadorEdad* a cada elemento de la lista personas; de manera que al llamar al método **getEdad()**, hará un llamado a esta función con la fecha de nacimiento y devolverá la edad calculada
+```java
+personas.forEach((Persona p) -> p.setCalculadorEdad(calculadorEdad));
+```
 Ejemplo 2. <br/>
 Ejemplo 3. <br/>
