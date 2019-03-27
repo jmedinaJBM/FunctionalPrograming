@@ -8,5 +8,5 @@ Una función en matemáticas se representa así:   Y = f (x) ;  donde x es una v
 En Java, a partir de la versión 8 (Java Standard Edition 8), hay disponible diferentes elementos que explotan al máximo la programación funcional, entre ellos están las Interfaces Funcionales y el Operador Lamda (->). 
 
 ### Interfaces Funcionales Java:
-
+Es una interface como cualquiera, pero con la anotación _@FunctionalInterface_ y que define un único método abstracto a ser implementado. Están definidas en el paquete java.util.function. Utilizadas exclusivamente en la programación funcional en Java. A continuación una explicación breve de cada una.
 
