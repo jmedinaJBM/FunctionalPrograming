@@ -200,3 +200,33 @@ Persona personaMayor = personas.getMejor(clasificadorMayor);    //<--- operador 
 personas.setComparador(null);                                   //<--- para usar el comparador predefinido en la clase Persona.
 Persona personaMayor2= personas.getMayor();
 ```
+8.  **BiPredicate<Integer,String>**<br/> Crearemos un filtro con un [BiPredicate<T,U>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BiPredicate.html) que llamaremos **filtroHombresMenores** y crearemos un método **subList** en la clase *Personas* que reciba en parámetros este *BiPredicate*, que al ser llamado el método **test**, reciba en parámetros la edad y el género de la persona; **filtroHombreMenores** devolvelrá *true* si es menor de 18 años y masculino. <br/><br/>
+En el ejemplo vemos la definición del *BiPredicate* **filtroHombresMenores**. Recibe en parámetros la edad de tipo *Integer* y el genero de tipo *String* (un valor *M* o *F*); evalúa si es menor de 18 años y si es Masculino (M) y devuelve *true* si es el caso.<br/>
+EN la definición del método **subList** en la clase *Personas*, recibe el parámetro **filtro**, un *BiPredicate*, que utiliza para evaluar cada objeto Persona de la lista, llamando al método **test**; finalmente el método *subList*, devuelve el conjunto de objetos Persona que cumplen con la condición definida en el *BiPredicate* **filtro**, en un objeto de tipo *Personas*.
+```java
+//---Método subList con un BiPredicate en la clase Personas---
+public Personas subList(BiPredicate<Integer,String> filtro){
+    Personas subLista = new Personas();
+    for(Persona persona : this){
+        if(filtro.test(persona.getEdad(), persona.getGenero())){
+            subLista.add(persona);
+        }
+    }
+    return(subLista);
+}
+```
+```java
+//---Definiendo un BiPredicate--- para evaluar edad y genero.
+BiPredicate<Integer,String> filtroHombresMenores = (Integer edad, String genero) -> {
+    boolean seleccionado = false;
+    if(edad < 18 && "M".equals(genero)){
+        return(true);
+    }
+    return(false);
+};
+
+//---Llamado al método subList con el BiPredicate---
+Personas hombresMenores = personas.subList(filtroHombresMenores);   //<--- bipredicado en funcionamiento.
+System.out.println("\n---RESULTADO: HOMBRES MENORES DE EDAD---");
+hombresMenores.forEach(imprimePersona);                         //<--- consumer en funcionamiento.      
+```
