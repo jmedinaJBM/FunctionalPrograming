@@ -44,5 +44,14 @@ Puede verse, la función que recibe en parámetro la fecha de nacimiento y devue
 ```java
 personas.forEach((Persona p) -> p.setCalculadorEdad(calculadorEdad));
 ```
+[Codigo-1]
+```java
+public Integer  getEdad() throws IllegalStateException {
+    if(this.calculadorEdad==null){
+        throw new IllegalStateException("Calculador de edad no definido");
+    }
+    return(this.calculadorEdad.apply(this.fechaNacimiento));
+    }
+```
 Ejemplo 2. <br/>
 Ejemplo 3. <br/>
