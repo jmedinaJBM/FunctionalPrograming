@@ -28,6 +28,17 @@ Se utiliza para realizar alguna operación con el valor de *T*, pero sin devolve
 3. [Apache Maven 3.6](https://www-us.apache.org/dist/maven/maven-3/3.6.0/binaries/apache-maven-3.6.0-bin.zip?fbclid=IwAR2pO8S7v5Frm0eKYDoTemFWSu7w0fIYOIXsDrmrthNlUKGHQbF6uN5TkoM)
 
 ## Ejemplos con Java
-Ejemplo 1. **Function<Date,Integer>**<br/>
+Los ejemplos que incluyo en esta nota, son ejemplos básico, con fines ilustrativos; para ello he creado dos clases, **Persona** y **Personas**. *Persona* es una clase para crear objetos que representen los datos de una Persona, valga la redundancia, esto es: id, nombre, apellido, fecha de nacimiento y genero. *Personas* es una lista definida como *ArrayList\<Persona>* para contener elementos de tipo *Persona*.  Crearemos una lista de personas en una variable que llamaremos **_personas_**, (en minúscula) y con esta lista vamos ejemplificar el uso de las *Interfaces Funcionales*. <br/><br/>
+Ejemplo 1. **Function<Date,Integer>**<br/> En la clase *Persona*, la edad es un valor calculado en función de la fecha de nacimiento. Para ello *Persona* tiene el método **setCalculadorEdad** que se utiliza para definir un *Function<Date,Integer>* que se ocupa de calcular la edad. <br/>
+```java
+Function<Date,Integer> calculadorEdad = (Date fechaNacimiento) -> {
+    Calendar cal = Calendar.getInstance();
+    cal.setTime(fechaNacimiento);
+    Calendar calHoy = Calendar.getInstance();
+    calHoy.setTimeInMillis(System.currentTimeMillis());
+    int edad = calHoy.get(Calendar.YEAR) - cal.get(Calendar.YEAR);
+    return(edad);
+};
+```
 Ejemplo 2. <br/>
 Ejemplo 3. <br/>
