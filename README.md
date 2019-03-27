@@ -134,3 +134,4 @@ BiConsumer<Persona,Boolean> separador = (Persona persona, Boolean resultado) -> 
 System.out.println("\n---RESULTADO: PERSONAS ACEPTADAS Y RECHAZADAS---");
 personas.subList(filtroEdad, separador);        //<--- biconsumer en funcionamiento.
 ```
+6.  **BiFunction<Persona,Persona,Integer>** <br/>Para este ejemplo vamos a construir un **comparador** utilizando las interface *[Comparator](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html)* y *[Comparable](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)*. Básicamente un comparador sirve para ordenar una lista de elementos determinando si un elemento es menor, igual o mayor que otro. Para ello la clase Persona debe implementar la interface Comparable y la clase Personas debe implementar la interface Comparator y también definir un método para establecer el comparador, un BiFunction que recibe 2 objetos Persona y que devuelve un valor entero.
