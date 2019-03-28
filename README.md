@@ -53,6 +53,7 @@ public Integer  getEdad() throws IllegalStateException {
     return(this.calculadorEdad.apply(this.fechaNacimiento));
 }
 ```
+---
 2. **Consumer\<Persona>**<br/>En este ejemplo veremos como se utiliza el consumer, de hecho en el ejemplo anterior, hay dos ejemplos de *Consumer*; uno de ellos lo detallamos aquí.<br/>
 El consumer **imprimePersona** solamente recibe el parámetro **p** de tipo *Persona* y lo utiliza para imprimir por consola los datos correspondientes del objeto *p*, pero no retorna valor alguno.
 ```java
@@ -63,6 +64,7 @@ Consumer<Persona> imprimePersona = (Persona p) -> {
 
 personas.forEach(imprimePersona);       //<--- consumer en funcionamiento.
 ```
+----
 3. **Predicate\<Persona>** <br/> Para este caso, vamos a crear un *Predicate\<Persona>* que llamaremos **filtroEdad**, que nos permita obtener de la lista de personas, las Personas que sean menores de *18 años*; y en la clase *Personas*, creamos un método **subList** que recibirá en parámetros el *Predicate\<Persona> filtroEdad*, que utiliza para filtrar las personas contenidas en la lista según las condiciones definidas en el *Predicate\<Persona>* dado en el parámetro filtro. <br/> puede verse que el predicate *filtroEdad*, recibe el parámetro **per** de tipo *Persona* y determina si el objeto es menor de 18 años, de ser así devuelve *true*.
 ```java
 //---Método subList en la clase Personas---
@@ -87,6 +89,7 @@ Personas personasMenores = personas.subList(filtroEdad); //<--- predicado en fun
 System.out.println("\n---RESULTADO: MENORES DE EDAD---");
 personasMenores.forEach(imprimePersona);        //<--- consumer en funcionamiento.
 ```
+----
 4.  **Supplier\<Persona>** <br/> Para ilustrar este ejemplo, crearemos un segundo método **subList** en la clase *Personas* con la variante que le agregamos un segundo parámetro, este es un *Supplier\<Persona>* que llamaremos **proveedorLista**, el cual proporciona una lista vacía donde se agregarán los objetos *Persona* que cumplan la condición dada en el parámetro **filtro**. Utilizaremos el mismo *Predicate* **filtroEdad** que hemos definido antes para obtener las personas menores de 18 años, pero en lugar de soloamente retornarlas, las agregaremos a la lista que proporciona **proveedorLista**. <br/><br/>
 En la definición del Supplier que hemos nombrado **menores2**, primero hemos creado la lista *personasMenores2* y seguido el Supplier *menores2* que retorna la lista creada. Finalmente tenemos el llamado al método *subList* con el Supplier *menores2*  y con el mismo Predicate *filtroEdad* definido para el ejemplo anterior. El resultado que se obtiene es el mismo, una lista con las personas menores de 18 años.
 ```java
@@ -111,6 +114,7 @@ System.out.println("\n---RESULTADO: MENORES DE EDAD CON SUPPLIER---");
 personasMenores2.forEach(imprimePersona);        //<--- consumer en funcionamiento.
         
 ```
+----
 5.  **BiConsumer<Persona, Boolean>** <br/> Para ilustrar este ejemplo, hemos construido un *Consumer* que llamaremos **separador**, (un concepto creado para este ejemplo), que utilizaremos en un nuevo método **subList** creado en la clase *Personas*; este en lugar de devolvernos en una lista las personas menores de 18, nos entregará cada persona indicándonos si ha sido aceptada o rechazada, de acuerdo al criterio del *Predicate filtroEdad* definido anteriormente. Esto nos da la oportunidad de decidir que hacer con cada objeto aceptado y/o rechazado. <br/><br/>
 En la definición del *BiConsumer* **separador**, vemos que este recibe 2 parámetros: el parámetro *persona* de tipo *Persona* y resultado de tipo *Boolean*, donde se indica *true* si es aceptado (es menor de 18) o *false* y si es rechazado (no es menor de 18). De esta forma se tiene la oportunidad de procesar todos los elementos y decidir que hacer con estos, identificando los aceptados y rechazados; en este ejemplo solo se imprime por consola si es Aceptado o Rechazado cada objeto *Persona*. El llamado al método **subList** se realiza con *filtroEdad* y *separador*.
 ```java
@@ -134,6 +138,7 @@ BiConsumer<Persona,Boolean> separador = (Persona persona, Boolean resultado) -> 
 System.out.println("\n---RESULTADO: PERSONAS ACEPTADAS Y RECHAZADAS---");
 personas.subList(filtroEdad, separador);        //<--- biconsumer en funcionamiento.
 ```
+-----
 6.  **BiFunction<Persona,Persona,Integer>** <br/>Para este ejemplo vamos a construir un **comparador** utilizando las interface *[Comparator\<T>](https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html)* y *[Comparable\<T>](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html)*. Básicamente un comparador sirve para ordenar una lista de elementos determinando si un elemento es menor, igual o mayor que otro. Para ello la clase *Persona* debe implementar la interface **Comparable** y la clase *Personas* debe implementar la interface *Comparator* y también definir un método para establecer el comparador, un *BiFunction* que recibe 2 objetos *Persona* y que devuelve un valor entero.<br/><br/>
 El *BiFunction* que hemos nombrado **comparadorNombre**, este recibe dos objetos de tipo *Persona* **per1** y **per2** y devuelve un valor entero como resultado de la comparación entre los nombres de ambos objetos.<br/><br/>
 En la clase *Personas* se implementa el método **compare**, que recibe los dos objetos *Persona* a comparar, **persona1** y **persona2**, los que son pasados en parámetros al apply del comparador. Si el comparador (el BiFunction) no se ha establecido, entonces se utiliza la comparación definida por defecto en los objetos *Persona*, la comparación se realiza con la edad.  Finalmente establecemos **comparadorNombre** con **setComparador(comparadorNombre)** en la lista personas (objeto de la clase Personas) y llamamos al método **personas.sort(personas)**; al recorrer la lista personas e imprimir por consola cada objeto veremos la lista ordenada por nombre.
@@ -177,6 +182,7 @@ BiFunction<Persona,Persona,Integer> comparadorNombre = (Persona per1, Persona pe
 personas.setComparador(comparadorNombre);   //<--- estableciendo el comparador de Nombre.
 personas.sort(personas);                //<--- comparador en funcionamiento.
 ```
+-----
 7.  **BinaryOperator\<Persona>** <br/> Recordemos que el [BinaryOperator\<T>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BinaryOperator.html) es un [BiFunction<T,T,T>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BiFunction.html) que recibe dos objetos del mismo tipo y devuelve uno de ellos; es por eso que su función básica es elegir a uno de los dos objetos presentados. Como ejemplo tenemos un *Clasificador* que recibe en parámetro dos objetos de tipo *Persona*, **per1** y **per2**,  evalúa una condición para decidir cual elegir y devolverlo. Además, en la clase *Personas*, hemos creado el método llamado **getMejor** que recibe en parámetro un *clasificador*, que es un *BinaryOperator\<Persona>*, y devuelve un objeto *Persona* como resultado de la clasificación. <br/><br/> 
 Podemos ver la definición del **clasificadorMayor** que evalúa la edad de los dos objetos de tipo *Persona*, **per1** y **per2**, y devuelve el de mayor edad. Luego se hace el llamado al método *personas*.**getMejor**(*clasificadorMayor*) que devolverá la persona Mayor de todas en la lista.
 ```java
@@ -200,6 +206,7 @@ Persona personaMayor = personas.getMejor(clasificadorMayor);    //<--- operador 
 personas.setComparador(null);                                   //<--- para usar el comparador predefinido en la clase Persona.
 Persona personaMayor2= personas.getMayor();
 ```
+----
 8.  **BiPredicate<Integer,String>**<br/> Crearemos un filtro con un [BiPredicate<T,U>](https://docs.oracle.com/javase/8/docs/api/java/util/function/BiPredicate.html) que llamaremos **filtroHombresMenores** y crearemos un método **subList** en la clase *Personas* que reciba en parámetros este *BiPredicate*, que al ser llamado el método **test**, reciba en parámetros la edad y el género de la persona; **filtroHombreMenores** devolvelrá *true* si es menor de 18 años y masculino. <br/><br/>
 En el ejemplo vemos la definición del *BiPredicate* **filtroHombresMenores**. Recibe en parámetros la edad de tipo *Integer* y el genero de tipo *String* (un valor *M* o *F*); evalúa si es menor de 18 años y si es Masculino (M) y devuelve *true* si es el caso.<br/>
 EN la definición del método **subList** en la clase *Personas*, recibe el parámetro **filtro**, un *BiPredicate*, que utiliza para evaluar cada objeto Persona de la lista, llamando al método **test**; finalmente el método *subList*, devuelve el conjunto de objetos Persona que cumplen con la condición definida en el *BiPredicate* **filtro**, en un objeto de tipo *Personas*.
