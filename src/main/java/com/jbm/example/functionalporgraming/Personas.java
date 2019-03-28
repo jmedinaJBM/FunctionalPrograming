@@ -70,12 +70,13 @@ public class Personas extends ArrayList<Persona> implements Comparator<Persona> 
      * @return Lista de personas filtradas.
      */
     public Personas subList(Predicate<Persona> filtro, Supplier<Personas> proveedorList){
+        Personas listaPersonas = proveedorList.get();
         for(Persona persona : this){
             if(filtro.test(persona)){
-                proveedorList.get().add(persona);
+                listaPersonas.add(persona);
             }
         }
-        return(proveedorList.get());
+        return(listaPersonas);
     }
     
     /**
