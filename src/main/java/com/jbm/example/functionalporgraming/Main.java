@@ -80,10 +80,10 @@ public class Main {
         
         
         //---Definición de un Supplier---
-        Personas personasMenores2 = new Personas();
-        Supplier<Personas> menores2 = () -> personasMenores2;
+        //Personas personasMenores2 = new Personas();
+        Supplier<Personas> menores2 = () -> new Personas();
         
-        personas.subList(filtroEdad, menores2);    //<--- supplier en funcionamiento.
+        Personas personasMenores2 = personas.subList(filtroEdad, menores2);    //<--- supplier en funcionamiento.
         System.out.println("\n---RESULTADO: MENORES DE EDAD CON SUPPLIER---");
         personasMenores2.forEach(imprimePersona);        //<--- consumer en funcionamiento.
         
