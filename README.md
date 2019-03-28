@@ -119,21 +119,22 @@ En la definición del Supplier que hemos nombrado **menores2**, primero hemos cr
 ```java
 //---Método sublist de la clase Personas con Predicate<Persona> y Supplier<Persona>---
 public Personas subList(Predicate<Persona> filtro, Supplier<Personas> proveedorList){
+    Personas listaPersonas = proveedorList.get();
     for(Persona persona : this){
         if(filtro.test(persona)){
-            proveedorList.get().add(persona);
+            listaPersonas.add(persona);
         }
     }
-    return(proveedorList.get());
+    return(listaPersonas);
 }
 ```
 ```java
 //---Definición de un Supplier---
-Personas personasMenores2 = new Personas();
-Supplier<Personas> menores2 = () -> personasMenores2;
+//Personas personasMenores2 = new Personas();
+Supplier<Personas> menores2 = () -> new Personas();
 
 //---Utilizando subList con el supplier menores2---
-personas.subList(filtroEdad, menores2);    //<--- supplier en funcionamiento.
+Personas personasMenores2 = personas.subList(filtroEdad, menores2);    //<--- supplier en funcionamiento.
 System.out.println("\n---RESULTADO: MENORES DE EDAD CON SUPPLIER---");
 personasMenores2.forEach(imprimePersona);        //<--- consumer en funcionamiento.
         
