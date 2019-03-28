@@ -3,6 +3,7 @@
 ## Tabla de Contenido
 - [Introducción](#introducción)
 - [Interfaces Funcionales Java](#interfaces-funcionales-java)
+    - [1. Function<T,R>](#1-function)
 - [Requisitos del Proyecto Java](#requisitos-del-proyecto-java)
 - [Ejemplos con Java](#ejemplos-con-java)
 
@@ -16,7 +17,8 @@ En Java, a partir de la versión 8 (*Java Standard Edition 8*), hay disponible d
 ## Interfaces Funcionales Java
 Es una interface como cualquiera, pero con la anotación **_@FunctionalInterface_** y que define un único método abstracto a ser implementado. Están definidas en el paquete _java.util.function_. Utilizadas exclusivamente en la programación funcional en Java. A continuación una explicación breve de cada una.
 
-1.  **Function<T,R>:** Similar a una función matemática de dos variables **`R = f(T)`**, donde **T** representa el valor de la variable *x* , **R** es el tipo de dato del valor resultante que debe devolver la función. En Java se expresa así: **`(T param) -> R `** Puede apreciarse el operador Lamda formado por el guión junto con el símbolo mayor que: `->`.  Los paréntesis son parte de la expresión. Sin el operador Lamda, en Java se ve así: **`R  apply(T param)`**. <br/>
+### 1. Function 
+Similar a una función matemática de dos variables **`R = f(T)`**, donde **T** representa el valor de la variable *x* , **R** es el tipo de dato del valor resultante que debe devolver la función. En Java se expresa así: **`(T param) -> R `** Puede apreciarse el operador Lamda formado por el guión junto con el símbolo mayor que: `->`.  Los paréntesis son parte de la expresión. Sin el operador Lamda, en Java se ve así: **`R  apply(T param)`**. <br/>
 Se utiliza para hacer un cálculo con el valor de `T` y obtener como resultado un valor de tipo _R_ que debe ser retornado; en el ejemplo calcularemos la edad de una persona dada su fecha de nacimiento. [Api-Doc](https://docs.oracle.com/javase/8/docs/api/java/util/function/Function.html)<br/><br/>
 2.  **Consumer\<T>:** Similar a *Function<T,R>*, con la diferencia, como puede apreciarse, no tiene la *R*, esto significa que no devuelve un valor. En Java se expresa así: **`(T param) -> `**  Sin el operador Lamda, se vería así:  **`void accept(T param)`**.<br/>
 Se utiliza para realizar alguna operación con el valor de *T*, pero sin devolver nada, puede ser una operación de guardado o de impresión.[Api-Doc](https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html)<br/><br/>
