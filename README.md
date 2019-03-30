@@ -1,3 +1,6 @@
+[![][license img]][license]
+<img src="Logo_v4.png" align="right" />
+
 # Progamación Funcional Java
 
 ## Tabla de Contenido
@@ -263,3 +266,5 @@ System.out.println("\n---RESULTADO: HOMBRES MENORES DE EDAD---");
 hombresMenores.forEach(imprimePersona);                         //<--- consumer en funcionamiento.      
 ```
 
+[license img]:https://img.shields.io/badge/License-MIT-green.svg
+[license]:https://github.com/jmedinaJBM/TOTP/blob/master/LICENSE
